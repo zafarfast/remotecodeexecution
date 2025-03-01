@@ -20,12 +20,12 @@ The system is composed of two components:
 
 1. Clone this repository to your local machine:
     ```bash
-    git clone https://github.com/yourusername/remote-shell-server-client.git
+    git clone https://github.com/zafarfast/remotecodeexecution.git
     ```
 
 2. Change to the project directory:
     ```bash
-    cd remote-shell-server-client
+    cd remotecodeexecution
     ```
 
 3. No dependencies need to be installed, as this project only uses the Python standard library.
