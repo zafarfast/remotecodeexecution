@@ -90,30 +90,30 @@ To exit the connection and shut down the server, simply type exit at the client'
 
 ## Code Structure
 
-- **server.py: The main server script that handles incoming client connections, receives commands, executes them, and sends back results.
-- **client.py: The main client script that connects to the server, sends commands, and handles receiving outputs or files.
-- **README.md: This file, explaining the project and its usage.
+- server.py: The main server script that handles incoming client connections, receives commands, executes them, and sends back results.
+- client.py: The main client script that connects to the server, sends commands, and handles receiving outputs or files.
+- README.md: This file, explaining the project and its usage.
 
 ##How It Works
 
 ### Client:
-- **The client connects to the server and sends serialized data using the pickle library. Commands are wrapped in a dictionary format to ensure structured communication.
-- **The client can send a variety of shell commands (pwd, ls, etc.) or request files using the download <file_path> command.
+- The client connects to the server and sends serialized data using the pickle library. Commands are wrapped in a dictionary format to ensure structured communication.
+- The client can send a variety of shell commands (pwd, ls, etc.) or request files using the download <file_path> command.
 
 ### Server:
-- **The server receives commands, executes them, and sends back the results to the client.
-- **The server uses the pickle library to deserialize received data and handle the command appropriately.
-- **File transfers are handled by reading the file content and sending it back to the client in chunks.
+- The server receives commands, executes them, and sends back the results to the client.
+- The server uses the pickle library to deserialize received data and handle the command appropriately.
+- File transfers are handled by reading the file content and sending it back to the client in chunks.
 
 
 ## Example of Commands
 Here are a few example commands that can be sent from the client:
 
-- **ls: List files in the current working directory on the server.
-- **pwd: Show the current directory on the server.
-- **cd <directory>: Change directory on the server (e.g., cd /home/user).
-- **download <file_path>: Download a file from the server (e.g., download /home/user/file.txt).
-- **exit: Close the connection between the client and server.
+- **ls**: List files in the current working directory on the server.
+- **pwd**: Show the current directory on the server.
+- **cd <directory>**: Change directory on the server (e.g., cd /home/user).
+- **download <file_path>**: Download a file from the server (e.g., download /home/user/file.txt).
+- **exit**: Close the connection between the client and server.
 
 ## Contributing
 Contributions are welcome! If you want to improve the functionality or report a bug, please feel free to fork the repository, make changes, and create a pull request.
