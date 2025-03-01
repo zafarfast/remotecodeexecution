@@ -3,12 +3,12 @@
 This project implements a **remote shell** using Python's **socket** library, where a server can accept commands from a client, execute those commands, and return the output. Additionally, it supports **file transfer** between the server and client.
 
 The system is composed of two components:
-1. **Server**: A Python-based TCP server that listens for incoming connections from the client. It can receive commands and execute them, then send the output or requested files back to the client.
-2. **Client**: A Python-based TCP client that connects to the server, sends commands (like `ls`, `cd`, etc.), and handles receiving the output or downloaded files.
+1. **Server**: A Python-based TCP server that listens for incoming connections from the client. It sends commands (like `ls`, `cd`, etc.), and handles receiving the output or downloaded files
+2. **Client**: A Python-based TCP client that connects to the server, and receive shell commands from the server. 
 
 ## Features
-- **Remote Command Execution**: The client can send shell commands (such as `pwd`, `ls`, `cd`, etc.) to the server, and the server will execute the commands and return the results.
-- **File Transfer**: The client can download files from the server using the `download` command.
+- **Remote Command Execution**: The server can send shell commands (such as `pwd`, `ls`, `cd`, etc.) to the client, and the client will execute the commands and return the results.
+- **File Transfer**: The server can download files from the client using the `download` command.
 - **Cross-Platform Support**: Works on both **Windows** and **Linux** systems.
 - **Simple Communication Protocol**: The server and client communicate using TCP sockets, with a basic protocol for sending messages and receiving responses.
 
@@ -58,17 +58,17 @@ The client will automatically connect to the server. Once connected, you can sen
 - **download <file_path>: Download a file from the server.
 
 ### Example Interaction
-## Server Output:
+## Server:
 
 ``` bash
 [+] Server listening on port 7878...
 [+] Connection established with ('127.0.0.1', 12345)
 ```
 
-## Client Input:
+## Client connects to server:
 ```
 bash
-ls
+b'0000000136'
 ```
 
 
@@ -79,31 +79,30 @@ ls
 received message length: 100
 ```
 
-## Server sends back:
+## Client sends back:
 
 ```bash
 data: List of files in the current directory
 ```
 
 ### 3. Exiting the Server and Client
-To exit the connection and shut down the server, simply type exit at the client's prompt.
+To exit the connection and shut down the servre, simply type exit at the server's prompt.
 
 ## Code Structure
 
-- server.py: The main server script that handles incoming client connections, receives commands, executes them, and sends back results.
-- client.py: The main client script that connects to the server, sends commands, and handles receiving outputs or files.
+- server.py: The main server script that handles incoming client connections, sends commands, and receives output.
+- client.py: The main client script that connects to the server, sends output, and handles incoming commands.
 - README.md: This file, explaining the project and its usage.
 
 ##How It Works
 
 ### Client:
-- The client connects to the server and sends serialized data using the pickle library. Commands are wrapped in a dictionary format to ensure structured communication.
-- The client can send a variety of shell commands (pwd, ls, etc.) or request files using the download <file_path> command.
+- The client connects to the server and sends serialized data using the pickle library. Data is wrapped in a dictionary format to ensure structured communication.
+- File transfers are handled by reading the file content and sending it to the servre in chunks.
 
 ### Server:
-- The server receives commands, executes them, and sends back the results to the client.
-- The server uses the pickle library to deserialize received data and handle the command appropriately.
-- File transfers are handled by reading the file content and sending it back to the client in chunks.
+- The server sends commands, and receives the output from client
+- The server uses the pickle library to deserialize received data.
 
 
 ## Example of Commands
